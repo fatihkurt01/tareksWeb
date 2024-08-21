@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TareksWebForm;
 
-namespace WindowsFormsApp2
+namespace TareksWeb
 {
     internal static class Program
     {
@@ -16,7 +17,7 @@ namespace WindowsFormsApp2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new TareksWebForm.TareksWeb());
         }
     }
 }

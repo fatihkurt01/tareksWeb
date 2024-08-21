@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp.WinForms;
 
-namespace WindowsFormsApp2
+namespace TareksWebForm
 {
-    public partial class Form1 : Form
+    public partial class TareksWeb : Form
     {
         private bool isPageLoaded = false;
 
-        public Form1()
+        public TareksWeb()
         {
             InitializeComponent();
             chromiumWebBrowser1.LoadingStateChanged += chromiumWebBrowser1_LoadingStateChanged;
@@ -157,7 +157,7 @@ namespace WindowsFormsApp2
                     }
                 }
             }
-            labelTotalCount.Text = "Toplam: " + dataGridView4.Rows.Count;
+  //          labelTotalCount.Text = "Toplam: " + dataGridView4.Rows.Count;
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -186,7 +186,7 @@ namespace WindowsFormsApp2
                     dataAdapter.Fill(dataTable);
                     dataGridView4.DataSource = dataTable;
 
-                    labelTotalCount.Text = "Toplam: " + dataTable.Rows.Count;
+//                    labelTotalCount.Text = "Toplam: " + dataTable.Rows.Count;
 
                     if (dataGridView4.Columns["tareksmasterid"] != null)
                     {
@@ -208,6 +208,6 @@ namespace WindowsFormsApp2
             }
         }
 
-       
+  
     }
 }
