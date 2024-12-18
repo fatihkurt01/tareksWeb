@@ -4,3 +4,6 @@
 /packages
 *.dll
 *.pdb
+*.vsidx
+*.cache
+*.suo
