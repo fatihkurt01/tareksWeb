@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace TareksWebForm
 
         public TareksWeb()
         {
+            this.Icon = new Icon("sec.ico");
             InitializeComponent();
             chromiumWebBrowser1.LoadingStateChanged += chromiumWebBrowser1_LoadingStateChanged;
 
@@ -341,21 +343,21 @@ namespace TareksWebForm
     group by beyannameid, kalemid, referansno, edisirano, gtip, faturano, faturatarih, aciklama, tareksmasterid
     order by edisirano, faturatarih, aciklama";
 
-            string grid3 = $"select [Belge Tarihi],[Belge Numarası],[referansno] as 'Referans No',[Gönderici Firma],[Sevk Ülke Ad],[Tic. Yapılan Ülke],[Çıkış Ülke Ad],[Üretici Firma],[Üretici Firma Adres]," +
+            string grid3 = $"select gtip as 'GTİP', [Edi Sıra No], [Belge Tarihi],[Belge Numarası],[referansno] as 'Referans No',[Gönderici Firma],[Sevk Ülke Ad],[Tic. Yapılan Ülke],[Çıkış Ülke Ad],[Üretici Firma],[Üretici Firma Adres]," +
                 $" [Üretici Firma Telefon], [Menşe Ülke], [Taşıma Şekli], esyaninbulunduguyer as [Eşyanın Bulunduğu Yer], [Giriş Çıkış Gümrük]," +
-                $"[Yük Boşaltma Gümrük], gtip as 'GTİP', [TSE], konteynerno as 'Konteyner No', [Belge Türü],[Ürün Cinsi],[Ürün Yapım Malzemesi],[Ürün Yaş Grubu],[Edi Sıra No], [Fatura Tarihi], [Fatura No], [Değer], " +
+                $"[Yük Boşaltma Gümrük], [TSE], konteynerno as 'Konteyner No', [Belge Türü],[Ürün Cinsi],[Ürün Yapım Malzemesi],[Ürün Yaş Grubu], [Fatura Tarihi], [Fatura No], [Değer], " +
                 $"[Dolar Değer], [Miktar], [Marka],[Model], [Birim Ad],[Değer Birimi], [İmal Yılı], [İthalat Amacı Tipi], [Eşya Kıymet], [KG Miktar], [Gümrük Miktar], [Muafiyet], [Ürün Adı], [Tebliğ Kapsamı Standartı],[Taşıma Senedi No], " +
                 $"isnull(TRY_Convert(int,sevkulke),0) as sevkulke, isnull(TRY_Convert(int,ticyapilanulke),0) as ticyapilanulke, " +
                 $"isnull(TRY_Convert(int,cikisulke),0) as cikisulke, isnull(TRY_Convert(int,tasimasekli),0) as tasimasekli, " +
-                $"isnull(TRY_Convert(int,menseulke),0) as menseulke, webvalue, tesvikkapsaminda, tareksdetayid, tareksvalue,[Belge Türü Master] from sdi_tareksdetay_view where tareksmasterid = @TareksMasterId";
+                $"isnull(TRY_Convert(int,menseulke),0) as menseulke, webvalue, tesvikkapsaminda, tareksdetayid, tareksvalue,[Belge Türü Master] from sdi_tareksdetay_view where tareksmasterid = @TareksMasterId order by [Edi Sıra No], [Fatura Tarihi]";
 
-            string grid5 = $"select [Belge Tarihi],[Belge Numarası],[referansno] as 'Referans No',[Gönderici Firma],[Sevk Ülke Ad],[Tic. Yapılan Ülke],[Çıkış Ülke Ad],[Üretici Firma],[Üretici Firma Adres]," +
+            string grid5 = $"select gtip as 'GTİP', [Edi Sıra No], [Belge Tarihi],[Belge Numarası],[referansno] as 'Referans No',[Gönderici Firma],[Sevk Ülke Ad],[Tic. Yapılan Ülke],[Çıkış Ülke Ad],[Üretici Firma],[Üretici Firma Adres]," +
                 $" [Üretici Firma Telefon], [Menşe Ülke], [Taşıma Şekli], esyaninbulunduguyer as [Eşyanın Bulunduğu Yer], [Giriş Çıkış Gümrük]," +
-                $"[Yük Boşaltma Gümrük], gtip as 'GTİP', [TSE], konteynerno as 'Konteyner No', [Belge Türü],[Ürün Cinsi],[Ürün Yapım Malzemesi],[Ürün Yaş Grubu],[Edi Sıra No], [Fatura Tarihi], [Fatura No], [Değer], " +
+                $"[Yük Boşaltma Gümrük], [TSE], konteynerno as 'Konteyner No', [Belge Türü],[Ürün Cinsi],[Ürün Yapım Malzemesi],[Ürün Yaş Grubu],[Fatura Tarihi], [Fatura No], [Değer], " +
                 $"[Dolar Değer], [Miktar], [Marka],[Model], [Birim Ad],[Değer Birimi], [İmal Yılı], [İthalat Amacı Tipi], [Eşya Kıymet], [KG Miktar], [Gümrük Miktar], [Muafiyet], [Ürün Adı], [Tebliğ Kapsamı Standartı],[Taşıma Senedi No], " +
                 $"isnull(TRY_Convert(int,sevkulke),0) as sevkulke, isnull(TRY_Convert(int,ticyapilanulke),0) as ticyapilanulke, " +
                 $"isnull(TRY_Convert(int,cikisulke),0) as cikisulke, isnull(TRY_Convert(int,tasimasekli),0) as tasimasekli, " +
-                $"isnull(TRY_Convert(int,menseulke),0) as menseulke, webvalue, tesvikkapsaminda, tareksdetayid, tareksvalue,[Belge Türü Master] from sdi_tareksdetay_view where tareksmasterid = @TareksMasterId";
+                $"isnull(TRY_Convert(int,menseulke),0) as menseulke, webvalue, tesvikkapsaminda, tareksdetayid, tareksvalue,[Belge Türü Master] from sdi_tareksdetay_view where tareksmasterid = @TareksMasterId order by [Edi Sıra No], [Fatura Tarihi]";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

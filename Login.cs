@@ -20,6 +20,8 @@ namespace TareksWeb
             InitializeComponent();
             this.AcceptButton = btnGiris;
             kullaniciGetir();
+            this.Icon = new Icon("sec.ico");
+
         }
 
 
